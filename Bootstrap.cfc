@@ -13,7 +13,7 @@
 	Public --->
 
 	<cffunction name="init">
-		<cfset this.version = "1.1.7">
+		<cfset this.version = "1.1.8">
 		<cfreturn this>
 	</cffunction>
 
@@ -38,6 +38,20 @@
 			};
 		</cfscript>
 		<cfreturn selectTag(argumentCollection=loc.formFieldArgs)>
+	</cffunction>
+
+	<cffunction name="bCheckBoxTag" returntype="string" hint="Bootstrap markup version of the Wheels `checkBox` form helper.">
+		<cfscript>
+			var loc = {};
+
+			loc.field = checkBoxTag(
+				argumentCollection=arguments,
+				labelPlacement="around",
+				labelClass="checkbox"
+			);
+
+		</cfscript>
+		<cfreturn loc.field>
 	</cffunction>
 
 	<cffunction name="bSubmitTag" returntype="string" hint="Bootstrap markup version of the standard Wheels `submitTag` form helper.">
@@ -70,6 +84,17 @@
 		</cfscript>
 		<cfreturn textFieldTag(argumentCollection=arguments)>
 	</cffunction>
+
+	<cffunction name="bPasswordFieldTag" returntype="string" hint="Bootstrap markup version of the standard Wheels `textFieldTag` form helper.">
+		<cfscript>
+			var loc = {
+				formFieldArgs=$bootstrapFormFieldArgs(arguments)
+			};
+		</cfscript>
+		<cfreturn PasswordFieldTag(argumentCollection=arguments)>
+	</cffunction>
+
+
 
 	<cffunction name="hStartFormTag" returntype="string" hint="Bootstrap markup version of the Wheels `startFormTag` form helper, except with the `form-horizontal` class applied for you.">
 		<cfargument name="class" type="string" required="false" default="" hint="Space-delimited list of classes to apply to the form tag.">
@@ -239,7 +264,7 @@
 			loc.paginationArgs.appendToPage = '</li>'; 
 			loc.paginationArgs.classForCurrent = "active";
 			loc.paginationArgs.linkToCurrentPage = false;
-			loc.paginationArgs.anchorDivider = "";
+			loc.paginationArgs.anchorDivider = "<li><a>-</a></li>";
 			loc.paginationArgs.linkToCurrentPage = true;
 
 			loc.paginationLinks = paginationLinks(argumentCollection=loc.paginationArgs);
