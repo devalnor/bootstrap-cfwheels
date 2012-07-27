@@ -232,6 +232,8 @@
 	Layout helpers --->
 
 	<cffunction name="bFlashMessages" returntype="string" hint="Bootstrap markup version of the Wheels `flashMessages` view helper.">
+		<cfargument name="class" type="string" required="false" hint="extra `class` passed to bflashMessage helper." default="">
+		
 		<cfscript>
 			var loc = {
 				flash=flash(),
@@ -246,7 +248,7 @@
 					loc.flashKey = ListGetAt(loc.flashKeyList, loc.i);
 
 					loc.flashMessages &=
-						'<div class="alert alert-#LCase(loc.flashKey)# fade in">
+						'<div class="alert alert-#LCase(loc.flashKey)# fade in #arguments.class#">
 							<a class="close" data-dismiss="alert" href="##" title="Dismiss">&times;</a>
 							#h(flash(loc.flashKey))#
 						</div>';
